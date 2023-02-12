@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 , maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <title>CSS 旋转太极图</title>
+    <style>
+      :root {
+        /* 太极图的宽高 */
+        --circle--width: 600px;
+        --circle--height: var(--circle--width);
+        /* 时间越长，转动越慢 */
+        --animation--time: 1.5s;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-color: #ccd3cc;
+        overflow: hidden;
+      }
+      div.circle {
+        /* 先给太极容器设置一下宽高 */
+        width: var(--circle--width);
+        height: var(--circle--height);
+        border-radius: 50%;
+
+        /* prettier-ignore */
+        background-image: 
+          /* 黑色的圆中的白色鱼眼 */
+          radial-gradient(25% 25% at 50% 25%, #fff 50%, transparent 50%),
+          /* 黑色的圆 */
+          radial-gradient(50% 50% at 50% 25%, #000 50%, transparent 50%), 
+          /* 白色的圆的黑色鱼眼 */
+          radial-gradient(25% 25% at 50% 75%, #000 50%, transparent 50%),
+          /* 白色的圆 */
+          radial-gradient(50% 50% at 50% 75%, #fff 50%, transparent 50%),
+          linear-gradient(to right, #000 50%, #fff 50%);
+
+        animation: run linear infinite var(--animation--time);
+        filter: drop-shadow(0 0 16px rgba(0, 0, 0, 0.96));
+      }
+
+      /* css3 动画 使太极旋转 */
+      @keyframes run {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 太极容器 -->
+    <div class="circle"></div>
+  </body>
+</html>
