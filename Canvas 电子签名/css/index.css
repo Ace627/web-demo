@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding-left: 16px;
+  background-color: #f1f1f1;
+}
+p {
+  margin: 16px 0;
+}
+#canvas {
+  cursor: pointer;
+  box-shadow: 0 0 4px skyblue;
+}
+.btn-group {
+  margin: 16px 0;
+}
+.btn-group button {
+  width: 100px;
+  height: 30px;
+}
