@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 , maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <title>放大镜效果</title>
+    <style>
+      body {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-color: #ccd3cc;
+        overflow: hidden;
+      }
+      .app {
+        display: flex;
+        align-items: center;
+        margin: 100px 0 0 100px;
+        padding: 16px;
+        overflow: hidden;
+      }
+      .sm-img {
+        position: relative;
+        width: 400px;
+        height: 400px;
+      }
+      .sm-img img {
+        width: 100%;
+        height: 100%;
+      }
+      .sm-img .mask {
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: none;
+        width: 200px;
+        height: 200px;
+        background-color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+      }
+      .lg-img {
+        position: relative;
+        display: none;
+        width: 400px;
+        height: 400px;
+        margin-left: 16px;
+        overflow: hidden;
+      }
+      .lg-img img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 200%;
+        height: 200%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <!-- 小图 -->
+      <div class="sm-img">
+        <img src="./img/avatar_img.jpg" alt="1x" draggable="false" />
+        <!-- 阴影蒙版 -->
+        <div class="mask"></div>
+      </div>
+      <!-- 大图 -->
+      <div class="lg-img">
+        <img src="./img/avatar_img.jpg" alt="2x" draggable="false" />
+      </div>
+    </div>
+
+    <script>
+      // 小图容器
+      const smImg = document.querySelector('.sm-img')
+      // 大图容器
+      const lgImg = document.querySelector('.lg-img')
+      // 大图图片
+      const lgImage = document.querySelector('.lg-img img')
+      // 阴影蒙版
+      const mask = document.querySelector('.mask')
+
+      // 给小图容器添加鼠标移入事件，让阴影蒙版和大图容器显示
+      smImg.onmouseover = () => {
+        mask.style.display = 'block'
+        lgImg.style.display = 'block'
+      }
+
+      // 给小图容器添加鼠标移动事件
+      smImg.onmousemove = (event) => {
+        // 鼠标位置 = 鼠标在页面的位置 - 小图容器距离屏幕的距离 - 阴影蒙版宽度的一半（保证鼠标定格在蒙版中心）
+        let move_x = event.clientX - smImg.offsetLeft - mask.offsetWidth / 2
+        let move_y = event.clientY - smImg.offsetTop - mask.offsetHeight / 2
+        // 边界限定
+        if (move_x < 0) move_x = 0
+        if (move_x > smImg.offsetWidth - mask.offsetWidth) move_x = smImg.offsetWidth - mask.offsetWidth
+        if (move_y < 0) move_y = 0
+        if (move_y > smImg.offsetHeight - mask.offsetHeight) move_y = smImg.offsetHeight - mask.offsetHeight
+        // 更新阴影蒙版位置
+        mask.style.left = move_x + 'px'
+        mask.style.top = move_y + 'px'
+        // 更新大图图片 位置
+        lgImage.style.left = -2 * move_x + 'px'
+        lgImage.style.top = -2 * move_y + 'px'
+      }
+
+      // 给小图容器添加鼠标移出事件，让阴影蒙版和大图容器消失
+      smImg.onmouseout = () => {
+        mask.style.display = 'none'
+        lgImg.style.display = 'none'
+      }
+    </script>
+  </body>
+</html>
