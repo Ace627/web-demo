@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 , maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <title>全选、反选、全不选</title>
+    <style>
+      body {
+        user-select: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-color: #ccd3cc;
+        overflow: hidden;
+      }
+      .main {
+        box-sizing: border-box;
+        width: 600px;
+        height: 400px;
+        padding: 16px;
+        border-radius: 16px;
+        box-shadow: 0 0 16px rgba(0, 0, 0, 0.96);
+      }
+      .main .menu {
+        margin-top: 16px;
+      }
+      .form-item {
+        margin: 6px 0;
+      }
+      .form-item__text {
+        color: #333;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <form action="">
+        <div class="form-item">
+          <input type="checkbox" />
+          <span class="form-item__text">少时，春风得意马蹄疾，不信人间有别离。</span>
+        </div>
+        <div class="form-item">
+          <input type="checkbox" />
+          <span class="form-item__text">待到秋来九月八，马踏东京赏樱花。</span>
+        </div>
+        <div class="form-item">
+          <input type="checkbox" />
+          <span class="form-item__text">纸上得来终觉浅，绝知此事要躬行。</span>
+        </div>
+        <div class="form-item">
+          <input type="checkbox" />
+          <span class="form-item__text">欲买桂花同载酒，终不似，少年游。</span>
+        </div>
+        <div class="form-item">
+          <input type="checkbox" />
+          <span class="form-item__text">春风得意马蹄疾，一日看尽长安花。</span>
+        </div>
+        <div class="form-item">
+          <input type="checkbox" />
+          <span class="form-item__text">仰天大笑出门去，我辈岂是蓬蒿人。</span>
+        </div>
+        <div class="form-item">
+          <input type="checkbox" />
+          <span class="form-item__text">我见青山多妩媚，料青山，见我应如是。</span>
+        </div>
+      </form>
+
+      <div class="menu">
+        <button onclick="checkAll()">全选</button>
+        <button onclick="checkReverse()">反选</button>
+        <button onclick="checkNever()">全不选</button>
+      </div>
+    </div>
+
+    <script>
+      // 获取所有的 input 节点
+      const input_list = document.querySelectorAll('input')
+
+      // 全选
+      function checkAll() {
+        input_list.forEach((input) => (input.checked = true))
+      }
+      // 反选
+      function checkReverse() {
+        input_list.forEach((input) => (input.checked = !input.checked))
+      }
+      // 全不选
+      function checkNever() {
+        input_list.forEach((input) => (input.checked = false))
+      }
+    </script>
+  </body>
+</html>
